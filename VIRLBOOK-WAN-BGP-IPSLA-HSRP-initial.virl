@@ -4,7 +4,7 @@
         <entry key="management_network" type="String">flat</entry>
         <entry key="management_lxc" type="Boolean">false</entry>
     </extensions>
-    <node name="R1" type="SIMPLE" subtype="IOSv" location="680,170" ipv4="192.168.0.5">
+    <node name="R1" type="SIMPLE" subtype="IOSv" location="591,167" ipv4="192.168.0.5">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="AutoNetkit.ibgp_role" type="String">Disabled</entry>
@@ -161,7 +161,7 @@ end</entry>
         <interface id="1" name="GigabitEthernet0/2" ipv4="10.0.0.2" netPrefixLenV4="16"/>
         <interface id="2" name="GigabitEthernet0/3" ipv4="10.2.0.2" netPrefixLenV4="16"/>
     </node>
-    <node name="R2" type="SIMPLE" subtype="IOSv" location="225,168" ipv4="192.168.0.6">
+    <node name="R2" type="SIMPLE" subtype="IOSv" location="321,170" ipv4="192.168.0.6">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="AutoNetkit.ibgp_role" type="String">Disabled</entry>
@@ -866,7 +866,7 @@ end</entry>
         <interface id="0" name="GigabitEthernet0/1" ipv4="10.3.0.1" netPrefixLenV4="16"/>
         <interface id="1" name="GigabitEthernet0/2"/>
     </node>
-    <node name="Switch" type="SIMPLE" subtype="Unmanaged Switch" location="451,171">
+    <node name="Switch" type="SIMPLE" subtype="Unmanaged Switch" location="455,256">
         <extensions>
             <entry key="AutoNetkit.ibgp_role" type="String">Disabled</entry>
             <entry key="Auto-generate config" type="Boolean">false</entry>
@@ -875,7 +875,7 @@ end</entry>
         <interface id="1" name="link2"/>
         <interface id="2" name="link3"/>
     </node>
-    <node name="Server" type="SIMPLE" subtype="server" location="447,276">
+    <node name="Server" type="SIMPLE" subtype="server" location="451,361">
         <extensions>
             <entry key="Auto-generate config" type="Boolean">false</entry>
             <entry key="config" type="String">#cloud-config
