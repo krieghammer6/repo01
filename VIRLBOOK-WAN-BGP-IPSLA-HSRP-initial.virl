@@ -4,13 +4,13 @@
         <entry key="management_network" type="String">flat</entry>
         <entry key="management_lxc" type="Boolean">false</entry>
     </extensions>
-    <node name="R1" type="SIMPLE" subtype="IOSv" location="680,170" ipv4="192.168.0.5">
+    <node name="R1" type="SIMPLE" subtype="IOSv" location="483,245" ipv4="192.168.0.1">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="AutoNetkit.ibgp_role" type="String">Disabled</entry>
             <entry key="Auto-generate config" type="Boolean">false</entry>
             <entry key="config" type="String">!
-! Last configuration change at 20:00:44 UTC Mon Sep 5 2016
+! Last configuration change at 16:50:30 EST Wed Nov 23 2016
 !
 version 15.6
 service timestamps debug datetime msec
@@ -25,11 +25,25 @@ boot-end-marker
 !
 enable password cisco
 !
-no aaa new-model
+aaa new-model
+!
+!
+aaa group server radius ISE-Radius
+ server name ISE
+!
+aaa authentication login default group ISE-Radius
+!
+!
+!
+!
+!
+aaa session-id common
 ethernet lmi ce
 !
 !
 !
+clock timezone EST -5 0
+clock summer-time EDT recurring
 mmi polling-interval 60
 no mmi auto-configure
 no mmi pvc
@@ -79,7 +93,8 @@ interface Loopback0
 !
 interface GigabitEthernet0/0
  description OOB Management
- ip address 172.16.1.133 255.255.255.0
+ ip address 172.16.1.55 255.255.255.0
+ shutdown
  duplex auto
  speed auto
  media-type rj45
@@ -110,8 +125,23 @@ ip forward-protocol nd
 !
 no ip http server
 no ip http secure-server
+ip route 10.1.100.0 255.255.255.0 172.16.1.1
+ip route 10.10.96.0 255.255.252.0 172.16.1.1
+!
+logging source-interface GigabitEthernet0/0
+logging host 10.10.98.40
+!
+snmp-server community udtlab RO
+snmp-server community udtnet RW
+snmp-server location Tally
+snmp-server contact mhanna@udtonline.com
+snmp-server chassis-id 
 !
 !
+!
+radius server ISE
+ address ipv4 10.1.100.21 auth-port 1645 acct-port 1646
+ key supersecret
 !
 !
 control-plane
@@ -150,10 +180,10 @@ line aux 0
 line vty 0 4
  exec-timeout 720 0
  password cisco
- login
  transport input telnet ssh
 !
 no scheduler allocate
+ntp server 10.1.100.40
 !
 end</entry>
         </extensions>
@@ -161,13 +191,13 @@ end</entry>
         <interface id="1" name="GigabitEthernet0/2" ipv4="10.0.0.2" netPrefixLenV4="16"/>
         <interface id="2" name="GigabitEthernet0/3" ipv4="10.2.0.2" netPrefixLenV4="16"/>
     </node>
-    <node name="R2" type="SIMPLE" subtype="IOSv" location="225,168" ipv4="192.168.0.6">
+    <node name="R2" type="SIMPLE" subtype="IOSv" location="268,245" ipv4="192.168.0.2">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="AutoNetkit.ibgp_role" type="String">Disabled</entry>
             <entry key="Auto-generate config" type="Boolean">false</entry>
             <entry key="config" type="String">!
-! Last configuration change at 20:04:00 UTC Mon Sep 5 2016
+! Last configuration change at 16:50:30 EST Wed Nov 23 2016
 !
 version 15.6
 service timestamps debug datetime msec
@@ -182,11 +212,25 @@ boot-end-marker
 !
 enable password cisco
 !
-no aaa new-model
+aaa new-model
+!
+!
+aaa group server radius ISE-Radius
+ server name ISE
+!
+aaa authentication login default group ISE-Radius
+!
+!
+!
+!
+!
+aaa session-id common
 ethernet lmi ce
 !
 !
 !
+clock timezone EST -5 0
+clock summer-time EDT recurring
 mmi polling-interval 60
 no mmi auto-configure
 no mmi pvc
@@ -215,7 +259,6 @@ multilink bundle-name authenticated
 !
 redundancy
 !
-no cdp run
 !
 ! 
 !
@@ -236,7 +279,8 @@ interface Loopback0
 !
 interface GigabitEthernet0/0
  description OOB Management
- ip address 172.16.1.134 255.255.255.0
+ ip address 172.16.1.56 255.255.255.0
+ shutdown
  duplex auto
  speed auto
  media-type rj45
@@ -260,8 +304,23 @@ ip forward-protocol nd
 !
 no ip http server
 no ip http secure-server
+ip route 10.1.100.0 255.255.255.0 172.16.1.1
+ip route 10.10.96.0 255.255.252.0 172.16.1.1
+!
+logging source-interface GigabitEthernet0/0
+logging host 10.10.98.40
+!
+snmp-server community udtlab RO
+snmp-server community udtnet RW
+snmp-server location Tally
+snmp-server contact mhanna@udtonline.com
+snmp-server chassis-id 
 !
 !
+!
+radius server ISE
+ address ipv4 10.1.100.21 auth-port 1645 acct-port 1646
+ key supersecret
 !
 !
 control-plane
@@ -300,23 +359,23 @@ line aux 0
 line vty 0 4
  exec-timeout 720 0
  password cisco
- login
  transport input telnet ssh
 !
 no scheduler allocate
+ntp server 10.1.100.40
 !
 end</entry>
         </extensions>
         <interface id="0" name="GigabitEthernet0/1" ipv4="10.1.0.3" netPrefixLenV4="16"/>
         <interface id="1" name="GigabitEthernet0/2" ipv4="10.3.0.2" netPrefixLenV4="16"/>
     </node>
-    <node name="ISP1" type="SIMPLE" subtype="IOSv" location="680,43" ipv4="192.168.0.9">
+    <node name="ISP1" type="SIMPLE" subtype="IOSv" location="594,67" ipv4="192.168.0.3">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="AutoNetkit.ibgp_role" type="String">Disabled</entry>
             <entry key="Auto-generate config" type="Boolean">false</entry>
             <entry key="config" type="String">!
-! Last configuration change at 19:47:31 UTC Mon Sep 5 2016
+! Last configuration change at 16:50:30 EST Wed Nov 23 2016
 !
 version 15.6
 service timestamps debug datetime msec
@@ -331,11 +390,25 @@ boot-end-marker
 !
 enable password cisco
 !
-no aaa new-model
+aaa new-model
+!
+!
+aaa group server radius ISE-Radius
+ server name ISE
+!
+aaa authentication login default group ISE-Radius
+!
+!
+!
+!
+!
+aaa session-id common
 ethernet lmi ce
 !
 !
 !
+clock timezone EST -5 0
+clock summer-time EDT recurring
 mmi polling-interval 60
 no mmi auto-configure
 no mmi pvc
@@ -400,7 +473,8 @@ interface Loopback9
 !
 interface GigabitEthernet0/0
  description OOB Management
- ip address 172.16.1.130 255.255.255.0
+ ip address 172.16.1.52 255.255.255.0
+ shutdown
  duplex auto
  speed auto
  media-type rj45
@@ -436,6 +510,8 @@ ip forward-protocol nd
 !
 no ip http server
 no ip http secure-server
+ip route 10.1.100.0 255.255.255.0 172.16.1.1
+ip route 10.10.96.0 255.255.252.0 172.16.1.1
 !
 !
 ip prefix-list OUTBOUND seq 10 permit 1.1.1.1/32
@@ -443,7 +519,20 @@ ip prefix-list OUTBOUND seq 20 permit 3.3.3.3/32
 ip prefix-list OUTBOUND seq 30 permit 5.5.5.5/32
 ip prefix-list OUTBOUND seq 40 permit 7.7.7.7/32
 ip prefix-list OUTBOUND seq 50 permit 9.9.9.9/32
+logging source-interface GigabitEthernet0/0
+logging host 10.10.98.40
 !
+snmp-server community udtlab RO
+snmp-server community udtnet RW
+snmp-server location Tally
+snmp-server contact mhanna@udtonline.com
+snmp-server chassis-id 
+!
+!
+!
+radius server ISE
+ address ipv4 10.1.100.21 auth-port 1645 acct-port 1646
+ key supersecret
 !
 !
 control-plane
@@ -482,23 +571,23 @@ line aux 0
 line vty 0 4
  exec-timeout 720 0
  password cisco
- login
  transport input telnet ssh
 !
 no scheduler allocate
+ntp server 10.1.100.40
 !
 end</entry>
         </extensions>
         <interface id="0" name="GigabitEthernet0/1" ipv4="10.0.0.1" netPrefixLenV4="16"/>
         <interface id="1" name="GigabitEthernet0/2"/>
     </node>
-    <node name="ISP2" type="SIMPLE" subtype="IOSv" location="487,42" ipv4="192.168.0.13">
+    <node name="ISP2" type="SIMPLE" subtype="IOSv" location="401,67" ipv4="192.168.0.4">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="AutoNetkit.ibgp_role" type="String">Disabled</entry>
             <entry key="Auto-generate config" type="Boolean">false</entry>
             <entry key="config" type="String">!
-! Last configuration change at 19:47:41 UTC Mon Sep 5 2016
+! Last configuration change at 16:50:29 EST Wed Nov 23 2016
 !
 version 15.6
 service timestamps debug datetime msec
@@ -513,11 +602,25 @@ boot-end-marker
 !
 enable password cisco
 !
-no aaa new-model
+aaa new-model
+!
+!
+aaa group server radius ISE-Radius
+ server name ISE
+!
+aaa authentication login default group ISE-Radius
+!
+!
+!
+!
+!
+aaa session-id common
 ethernet lmi ce
 !
 !
 !
+clock timezone EST -5 0
+clock summer-time EDT recurring
 mmi polling-interval 60
 no mmi auto-configure
 no mmi pvc
@@ -582,7 +685,8 @@ interface Loopback10
 !
 interface GigabitEthernet0/0
  description OOB Management
- ip address 172.16.1.131 255.255.255.0
+ ip address 172.16.1.53 255.255.255.0
+ shutdown
  duplex auto
  speed auto
  media-type rj45
@@ -627,6 +731,8 @@ ip forward-protocol nd
 !
 no ip http server
 no ip http secure-server
+ip route 10.1.100.0 255.255.255.0 172.16.1.1
+ip route 10.10.96.0 255.255.252.0 172.16.1.1
 !
 !
 ip prefix-list OUTBOUND seq 10 permit 2.2.2.2/32
@@ -634,7 +740,20 @@ ip prefix-list OUTBOUND seq 20 permit 4.4.4.4/32
 ip prefix-list OUTBOUND seq 30 permit 6.6.6.6/32
 ip prefix-list OUTBOUND seq 40 permit 8.8.8.8/32
 ip prefix-list OUTBOUND seq 50 permit 10.10.10.10/32
+logging source-interface GigabitEthernet0/0
+logging host 10.10.98.40
 !
+snmp-server community udtlab RO
+snmp-server community udtnet RW
+snmp-server location Tally
+snmp-server contact mhanna@udtonline.com
+snmp-server chassis-id 
+!
+!
+!
+radius server ISE
+ address ipv4 10.1.100.21 auth-port 1645 acct-port 1646
+ key supersecret
 !
 !
 control-plane
@@ -673,10 +792,10 @@ line aux 0
 line vty 0 4
  exec-timeout 720 0
  password cisco
- login
  transport input telnet ssh
 !
 no scheduler allocate
+ntp server 10.1.100.40
 !
 end</entry>
         </extensions>
@@ -684,13 +803,13 @@ end</entry>
         <interface id="1" name="GigabitEthernet0/2"/>
         <interface id="2" name="GigabitEthernet0/3"/>
     </node>
-    <node name="ISP3" type="SIMPLE" subtype="IOSv" location="225,41" ipv4="192.168.0.17">
+    <node name="ISP3" type="SIMPLE" subtype="IOSv" location="156,66" ipv4="192.168.0.5">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="AutoNetkit.ibgp_role" type="String">Disabled</entry>
             <entry key="Auto-generate config" type="Boolean">false</entry>
             <entry key="config" type="String">!
-! Last configuration change at 19:47:43 UTC Mon Sep 5 2016
+! Last configuration change at 16:50:30 EST Wed Nov 23 2016
 !
 version 15.6
 service timestamps debug datetime msec
@@ -705,11 +824,25 @@ boot-end-marker
 !
 enable password cisco
 !
-no aaa new-model
+aaa new-model
+!
+!
+aaa group server radius ISE-Radius
+ server name ISE
+!
+aaa authentication login default group ISE-Radius
+!
+!
+!
+!
+!
+aaa session-id common
 ethernet lmi ce
 !
 !
 !
+clock timezone EST -5 0
+clock summer-time EDT recurring
 mmi polling-interval 60
 no mmi auto-configure
 no mmi pvc
@@ -738,7 +871,6 @@ multilink bundle-name authenticated
 !
 redundancy
 !
-no cdp run
 !
 ! 
 !
@@ -774,7 +906,8 @@ interface Loopback99
 !
 interface GigabitEthernet0/0
  description OOB Management
- ip address 172.16.1.132 255.255.255.0
+ ip address 172.16.1.54 255.255.255.0
+ shutdown
  duplex auto
  speed auto
  media-type rj45
@@ -810,6 +943,8 @@ ip forward-protocol nd
 !
 no ip http server
 no ip http secure-server
+ip route 10.1.100.0 255.255.255.0 172.16.1.1
+ip route 10.10.96.0 255.255.252.0 172.16.1.1
 !
 !
 ip prefix-list OUTBOUND seq 10 permit 11.11.11.11/32
@@ -817,7 +952,20 @@ ip prefix-list OUTBOUND seq 20 permit 33.33.33.33/32
 ip prefix-list OUTBOUND seq 30 permit 55.55.55.55/32
 ip prefix-list OUTBOUND seq 40 permit 77.77.77.77/32
 ip prefix-list OUTBOUND seq 50 permit 99.99.99.99/32
+logging source-interface GigabitEthernet0/0
+logging host 10.10.98.40
 !
+snmp-server community udtlab RO
+snmp-server community udtnet RW
+snmp-server location Tally
+snmp-server contact mhanna@udtonline.com
+snmp-server chassis-id 
+!
+!
+!
+radius server ISE
+ address ipv4 10.1.100.21 auth-port 1645 acct-port 1646
+ key supersecret
 !
 !
 control-plane
@@ -856,17 +1004,17 @@ line aux 0
 line vty 0 4
  exec-timeout 720 0
  password cisco
- login
  transport input telnet ssh
 !
 no scheduler allocate
+ntp server 10.1.100.40
 !
 end</entry>
         </extensions>
         <interface id="0" name="GigabitEthernet0/1" ipv4="10.3.0.1" netPrefixLenV4="16"/>
         <interface id="1" name="GigabitEthernet0/2"/>
     </node>
-    <node name="Switch" type="SIMPLE" subtype="Unmanaged Switch" location="451,171">
+    <node name="Switch" type="SIMPLE" subtype="Unmanaged Switch" location="380,385">
         <extensions>
             <entry key="AutoNetkit.ibgp_role" type="String">Disabled</entry>
             <entry key="Auto-generate config" type="Boolean">false</entry>
@@ -875,7 +1023,7 @@ end</entry>
         <interface id="1" name="link2"/>
         <interface id="2" name="link3"/>
     </node>
-    <node name="Server" type="SIMPLE" subtype="server" location="447,276">
+    <node name="Server" type="SIMPLE" subtype="server" location="376,490">
         <extensions>
             <entry key="Auto-generate config" type="Boolean">false</entry>
             <entry key="config" type="String">#cloud-config
