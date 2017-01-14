@@ -4,7 +4,7 @@
         <entry key="management_network" type="String">flat</entry>
         <entry key="management_lxc" type="Boolean">false</entry>
     </extensions>
-    <node name="R1" type="SIMPLE" subtype="IOSv" location="451,250" ipv4="192.168.0.1">
+    <node name="R1" type="SIMPLE" subtype="IOSv" location="491,429" ipv4="192.168.0.1">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="AutoNetkit.ibgp_role" type="String">Disabled</entry>

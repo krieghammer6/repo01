@@ -166,7 +166,7 @@ router bgp 1&#xD;
         <interface id="4" name="Ethernet1/5" ipv4="10.0.0.21" netPrefixLenV4="30"/>
         <interface id="5" name="Ethernet1/6" ipv4="10.0.0.25" netPrefixLenV4="30"/>
     </node>
-    <node name="nx-osv9000-2" type="SIMPLE" subtype="NX-OSv 9000" location="490,110" ipv4="192.168.0.2">
+    <node name="nx-osv9000-2" type="SIMPLE" subtype="NX-OSv 9000" location="505,110" ipv4="192.168.0.2">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">! NX-OSv Config generated on 2017-01-13 16:16&#xD;
@@ -328,7 +328,7 @@ router bgp 1&#xD;
         <interface id="4" name="Ethernet1/5" ipv4="10.0.0.29" netPrefixLenV4="30"/>
         <interface id="5" name="Ethernet1/6" ipv4="10.0.0.37" netPrefixLenV4="30"/>
     </node>
-    <node name="nx-osv9000-3" type="SIMPLE" subtype="NX-OSv 9000" location="261,225" ipv4="192.168.0.3">
+    <node name="nx-osv9000-3" type="SIMPLE" subtype="NX-OSv 9000" location="270,225" ipv4="192.168.0.3">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">! NX-OSv Config generated on 2017-01-13 16:16&#xD;
@@ -706,6 +706,7 @@ router bgp 1&#xD;
         <interface id="0" name="Ethernet1/1" ipv4="10.0.0.26" netPrefixLenV4="30"/>
         <interface id="1" name="Ethernet1/2" ipv4="10.0.0.38" netPrefixLenV4="30"/>
     </node>
+    <node name="lxc-sshd-1" type="SIMPLE" subtype="lxc-sshd" location="178,246"/>
     <annotations/>
     <connection dst="/virl:topology/virl:node[2]/virl:interface[1]" src="/virl:topology/virl:node[1]/virl:interface[1]"/>
     <connection dst="/virl:topology/virl:node[2]/virl:interface[2]" src="/virl:topology/virl:node[1]/virl:interface[2]"/>
