@@ -7,7 +7,7 @@
     <node name="nx-osv9000-1" type="SIMPLE" subtype="NX-OSv 9000" location="270,110" ipv4="192.168.0.1">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
-            <entry key="config" type="String">! NX-OSv Config generated on 2017-02-23 17:37
+            <entry key="config" type="String">! NX-OSv Config generated on 2018-02-04 19:54
 ! by autonetkit_0.23.5
 !
 version 6.2(1)
@@ -59,49 +59,49 @@ interface Loopback0
 
 interface Ethernet1/1
   description to nx-osv9000-2
+  no switchport
   ip address 10.0.0.13/30
   ip router ospf 1 area 0
-  no switchport
   mac-address fa16.3e00.0001
   no shutdown
 
 interface Ethernet1/2
   description to nx-osv9000-2
+  no switchport
   ip address 10.0.0.17/30
   ip router ospf 1 area 0
-  no switchport
   mac-address fa16.3e00.0002
   no shutdown
 
 interface Ethernet1/3
   description to nx-osv9000-2
+  no switchport
   ip address 10.0.0.21/30
   ip router ospf 1 area 0
-  no switchport
   mac-address fa16.3e00.0003
   no shutdown
 
 interface Ethernet1/4
   description to nx-osv9000-3
+  no switchport
   ip address 10.0.0.25/30
   ip router ospf 1 area 0
-  no switchport
   mac-address fa16.3e00.0004
   no shutdown
 
 interface Ethernet1/5
   description to nx-osv9000-4
+  no switchport
   ip address 10.0.0.29/30
   ip router ospf 1 area 0
-  no switchport
   mac-address fa16.3e00.0005
   no shutdown
 
 interface Ethernet1/6
   description to nx-osv9000-5
+  no switchport
   ip address 10.0.0.33/30
   ip router ospf 1 area 0
-  no switchport
   mac-address fa16.3e00.0006
   no shutdown
 
@@ -166,7 +166,7 @@ router bgp 1
     <node name="nx-osv9000-2" type="SIMPLE" subtype="NX-OSv 9000" location="505,110" ipv4="192.168.0.2">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
-            <entry key="config" type="String">! NX-OSv Config generated on 2017-02-23 17:37
+            <entry key="config" type="String">! NX-OSv Config generated on 2018-02-04 19:54
 ! by autonetkit_0.23.5
 !
 version 6.2(1)
@@ -218,49 +218,49 @@ interface Loopback0
 
 interface Ethernet1/1
   description to nx-osv9000-1
+  no switchport
   ip address 10.0.0.14/30
   ip router ospf 1 area 0
-  no switchport
   mac-address fa16.3e00.0008
   no shutdown
 
 interface Ethernet1/2
   description to nx-osv9000-1
+  no switchport
   ip address 10.0.0.18/30
   ip router ospf 1 area 0
-  no switchport
   mac-address fa16.3e00.0009
   no shutdown
 
 interface Ethernet1/3
   description to nx-osv9000-1
+  no switchport
   ip address 10.0.0.22/30
   ip router ospf 1 area 0
-  no switchport
   mac-address fa16.3e00.000a
   no shutdown
 
 interface Ethernet1/4
   description to nx-osv9000-4
+  no switchport
   ip address 10.0.0.41/30
   ip router ospf 1 area 0
-  no switchport
   mac-address fa16.3e00.000b
   no shutdown
 
 interface Ethernet1/5
   description to nx-osv9000-3
+  no switchport
   ip address 10.0.0.37/30
   ip router ospf 1 area 0
-  no switchport
   mac-address fa16.3e00.000c
   no shutdown
 
 interface Ethernet1/6
   description to nx-osv9000-5
+  no switchport
   ip address 10.0.0.45/30
   ip router ospf 1 area 0
-  no switchport
   mac-address fa16.3e00.000d
   no shutdown
 
@@ -325,7 +325,7 @@ router bgp 1
     <node name="nx-osv9000-3" type="SIMPLE" subtype="NX-OSv 9000" location="270,225" ipv4="192.168.0.3">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
-            <entry key="config" type="String">! NX-OSv Config generated on 2017-02-23 17:37
+            <entry key="config" type="String">! NX-OSv Config generated on 2018-02-04 19:54
 ! by autonetkit_0.23.5
 !
 version 6.2(1)
@@ -377,25 +377,25 @@ interface Loopback0
 
 interface Ethernet1/1
   description to nx-osv9000-1
+  no switchport
   ip address 10.0.0.26/30
   ip router ospf 1 area 0
-  no switchport
   mac-address fa16.3e00.000f
   no shutdown
 
 interface Ethernet1/2
   description to nx-osv9000-2
+  no switchport
   ip address 10.0.0.38/30
   ip router ospf 1 area 0
-  no switchport
   mac-address fa16.3e00.0010
   no shutdown
 
 interface Ethernet1/3
   description to lxc-sshd-1
+  no switchport
   ip address 10.0.0.6/30
   ip router ospf 1 area 0
-  no switchport
   mac-address fa16.3e00.0011
   no shutdown
 
@@ -457,7 +457,7 @@ router bgp 1
     <node name="nx-osv9000-4" type="SIMPLE" subtype="NX-OSv 9000" location="505,225" ipv4="192.168.0.4">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
-            <entry key="config" type="String">! NX-OSv Config generated on 2017-02-23 17:37
+            <entry key="config" type="String">! NX-OSv Config generated on 2018-02-04 19:54
 ! by autonetkit_0.23.5
 !
 version 6.2(1)
@@ -509,25 +509,25 @@ interface Loopback0
 
 interface Ethernet1/1
   description to nx-osv9000-2
+  no switchport
   ip address 10.0.0.42/30
   ip router ospf 1 area 0
-  no switchport
   mac-address fa16.3e00.0013
   no shutdown
 
 interface Ethernet1/2
   description to nx-osv9000-1
+  no switchport
   ip address 10.0.0.30/30
   ip router ospf 1 area 0
-  no switchport
   mac-address fa16.3e00.0014
   no shutdown
 
 interface Ethernet1/3
   description to lxc-sshd-1
+  no switchport
   ip address 10.0.0.10/30
   ip router ospf 1 area 0
-  no switchport
   mac-address fa16.3e00.0015
   no shutdown
 
@@ -589,7 +589,7 @@ router bgp 1
     <node name="nx-osv9000-5" type="SIMPLE" subtype="NX-OSv 9000" location="379,6" ipv4="192.168.0.5">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
-            <entry key="config" type="String">! NX-OSv Config generated on 2017-02-23 17:37
+            <entry key="config" type="String">! NX-OSv Config generated on 2018-02-04 19:54
 ! by autonetkit_0.23.5
 !
 version 6.2(1)
@@ -641,17 +641,17 @@ interface Loopback0
 
 interface Ethernet1/1
   description to nx-osv9000-1
+  no switchport
   ip address 10.0.0.34/30
   ip router ospf 1 area 0
-  no switchport
   mac-address fa16.3e00.0017
   no shutdown
 
 interface Ethernet1/2
   description to nx-osv9000-2
+  no switchport
   ip address 10.0.0.46/30
   ip router ospf 1 area 0
-  no switchport
   mac-address fa16.3e00.0018
   no shutdown
 
@@ -724,7 +724,7 @@ runcmd:
 - service sshd restart
 users:
 - default
-- gecos: User configured by VIRL Configuration Engine 0.23.9
+- gecos: User configured by VIRL Configuration Engine 0.23.10
   lock-passwd: false
   name: cisco
   plain-text-passwd: cisco
@@ -752,11 +752,17 @@ write_files:
     ifconfig eth1 up 10.0.0.5 netmask 255.255.255.252
     ifconfig eth2 up 10.0.0.9 netmask 255.255.255.252
     route add -host 192.168.0.1 gw 10.0.0.6 dev eth1
-    route add -net 10.0.0.0/8 gw 10.0.0.6 dev eth1
+    route add -net 10.0.0.4/30 gw 10.0.0.6 dev eth1
+    route add -net 10.0.0.8/29 gw 10.0.0.6 dev eth1
+    route add -net 10.0.0.16/28 gw 10.0.0.6 dev eth1
+    route add -net 10.0.0.32/28 gw 10.0.0.6 dev eth1
     route add -net 192.168.0.2/31 gw 10.0.0.6 dev eth1
     route add -net 192.168.0.4/31 gw 10.0.0.6 dev eth1
     route add -host 192.168.0.1 gw 10.0.0.10 dev eth2
-    route add -net 10.0.0.0/8 gw 10.0.0.10 dev eth2
+    route add -net 10.0.0.4/30 gw 10.0.0.10 dev eth2
+    route add -net 10.0.0.8/29 gw 10.0.0.10 dev eth2
+    route add -net 10.0.0.16/28 gw 10.0.0.10 dev eth2
+    route add -net 10.0.0.32/28 gw 10.0.0.10 dev eth2
     route add -net 192.168.0.2/31 gw 10.0.0.10 dev eth2
     route add -net 192.168.0.4/31 gw 10.0.0.10 dev eth2
     exit 0
