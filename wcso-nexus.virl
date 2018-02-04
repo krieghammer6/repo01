@@ -146,7 +146,7 @@ router bgp 1
         <interface id="0" name="Ethernet1/1" ipv4="10.0.0.22" netPrefixLenV4="30"/>
         <interface id="1" name="Ethernet1/2" ipv4="10.0.0.26" netPrefixLenV4="30"/>
     </node>
-    <node name="4500-1" type="SIMPLE" subtype="IOSvL2" location="314,163">
+    <node name="4500-1" type="SIMPLE" subtype="IOSvL2" location="382,172">
         <extensions>
             <entry key="Auto-generate config" type="Boolean">false</entry>
         </extensions>
