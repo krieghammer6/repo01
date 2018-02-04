@@ -4,7 +4,7 @@
         <entry key="management_network" type="String">flat</entry>
         <entry key="management_lxc" type="Boolean">false</entry>
     </extensions>
-    <node name="nx-osv9000-1" type="SIMPLE" subtype="NX-OSv 9000" location="347,311">
+    <node name="nx-osv9000-1" type="SIMPLE" subtype="NX-OSv 9000" location="347,311" vmImage="NX-OSv 9000 [d589e886-5b76-4069-a3e6-9c258caffd2c]" vmFlavor="NX-OSv 9000 [efc67d56-56b9-49f5-a5bd-d7e4ed5ede10]">
         <extensions>
             <entry key="Auto-generate config" type="Boolean">false</entry>
         </extensions>
