@@ -146,13 +146,13 @@ router bgp 1
         <interface id="0" name="Ethernet1/1" ipv4="10.0.0.22" netPrefixLenV4="30"/>
         <interface id="1" name="Ethernet1/2" ipv4="10.0.0.26" netPrefixLenV4="30"/>
     </node>
-    <node name="4500-1" type="SIMPLE" subtype="IOSvL2" location="340,184">
+    <node name="4500-1" type="SIMPLE" subtype="IOSvL2" location="414,171">
         <extensions>
             <entry key="Auto-generate config" type="Boolean">false</entry>
         </extensions>
         <interface id="0" name="GigabitEthernet0/1"/>
     </node>
-    <node name="4500-2" type="SIMPLE" subtype="IOSvL2" location="576,175">
+    <node name="4500-2" type="SIMPLE" subtype="IOSvL2" location="508,172">
         <extensions>
             <entry key="Auto-generate config" type="Boolean">false</entry>
         </extensions>
