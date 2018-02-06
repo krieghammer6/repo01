@@ -151,6 +151,7 @@ router bgp 1
             <entry key="Auto-generate config" type="Boolean">false</entry>
         </extensions>
         <interface id="0" name="GigabitEthernet0/1"/>
+        <interface id="1" name="GigabitEthernet0/2"/>
     </node>
     <node name="4500-2" type="SIMPLE" subtype="IOSvL2" location="576,175">
         <extensions>
