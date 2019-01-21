@@ -189,7 +189,7 @@ end</entry>
         <interface id="1" name="GigabitEthernet0/2" ipv4="10.0.0.2" netPrefixLenV4="16"/>
         <interface id="2" name="GigabitEthernet0/3" ipv4="10.2.0.2" netPrefixLenV4="16"/>
     </node>
-    <node name="R2" type="SIMPLE" subtype="IOSv" location="199,429" ipv4="192.168.0.2">
+    <node name="R2" type="SIMPLE" subtype="IOSv" location="260,399" ipv4="192.168.0.2">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="AutoNetkit.ibgp_role" type="String">Disabled</entry>
