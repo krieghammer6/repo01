@@ -8,9 +8,9 @@
         <extensions>
             <entry key="Auto-generate config" type="Boolean">false</entry>
             <entry key="config" type="String">!Command: show running-config
-!Time: Wed Jun 28 21:31:03 2017
+!Time: Wed Jan 30 18:34:30 2019
 
-version 7.0(3)I5(1)
+version 7.0(3)I7(1)
 power redundancy-mode combined force
 
 hostname Spine-1
@@ -48,13 +48,13 @@ rmon event 3 description ERROR(3) owner PMON@ERROR
 rmon event 4 description WARNING(4) owner PMON@WARNING
 rmon event 5 description INFORMATION(5) owner PMON@INFO
 
-vlan 1-500
 ip pim rp-address 10.8.251.1 group-list 225.0.0.0/8
 ip pim bsr rp-candidate loopback1 group-list 225.0.0.0/8
 ip pim log-neighbor-changes
 ip pim ssm range 232.0.0.0/8
 ip pim anycast-rp 10.8.251.1 10.8.250.1
 ip pim anycast-rp 10.8.251.1 10.8.250.2
+vlan 1-500
 
 route-map PermitAll permit 10
   set ip next-hop unchanged
@@ -107,9 +107,119 @@ interface Ethernet1/8
 
 interface Ethernet1/9
 
+interface Ethernet1/10
+
+interface Ethernet1/11
+
+interface Ethernet1/12
+
+interface Ethernet1/13
+
+interface Ethernet1/14
+
+interface Ethernet1/15
+
+interface Ethernet1/16
+
+interface Ethernet1/17
+
+interface Ethernet1/18
+
+interface Ethernet1/19
+
+interface Ethernet1/20
+
+interface Ethernet1/21
+
+interface Ethernet1/22
+
+interface Ethernet1/23
+
+interface Ethernet1/24
+
+interface Ethernet1/25
+
+interface Ethernet1/26
+
+interface Ethernet1/27
+
+interface Ethernet1/28
+
+interface Ethernet1/29
+
+interface Ethernet1/30
+
+interface Ethernet1/31
+
+interface Ethernet1/32
+
+interface Ethernet1/33
+
+interface Ethernet1/34
+
+interface Ethernet1/35
+
+interface Ethernet1/36
+
+interface Ethernet1/37
+
+interface Ethernet1/38
+
+interface Ethernet1/39
+
+interface Ethernet1/40
+
+interface Ethernet1/41
+
+interface Ethernet1/42
+
+interface Ethernet1/43
+
+interface Ethernet1/44
+
+interface Ethernet1/45
+
+interface Ethernet1/46
+
+interface Ethernet1/47
+
+interface Ethernet1/48
+
+interface Ethernet1/49
+
+interface Ethernet1/50
+
+interface Ethernet1/51
+
+interface Ethernet1/52
+
+interface Ethernet1/53
+
+interface Ethernet1/54
+
+interface Ethernet1/55
+
+interface Ethernet1/56
+
+interface Ethernet1/57
+
+interface Ethernet1/58
+
+interface Ethernet1/59
+
+interface Ethernet1/60
+
+interface Ethernet1/61
+
+interface Ethernet1/62
+
+interface Ethernet1/63
+
+interface Ethernet1/64
+
 interface mgmt0
-  ip address dhcp
   vrf member management
+  ip address 172.16.1.56/24
 
 interface loopback0
   description VTEP IP &amp; BGP
@@ -170,7 +280,10 @@ router bgp 65100
     address-family l2vpn evpn
       send-community
       send-community extended
-      route-reflector-client</entry>
+      route-reflector-client
+
+
+</entry>
         </extensions>
         <interface id="0" name="Ethernet1/1"/>
         <interface id="1" name="Ethernet1/2"/>
@@ -180,6 +293,270 @@ router bgp 65100
     <node name="Spine-2" type="SIMPLE" subtype="NX-OSv 9000" location="532,44">
         <extensions>
             <entry key="Auto-generate config" type="Boolean">false</entry>
+            <entry key="config" type="String">!Command: show running-config
+!Time: Wed Jan 30 18:34:33 2019
+
+version 7.0(3)I7(1)
+hostname Spine-2
+vdc Spine-2 id 1
+  limit-resource vlan minimum 16 maximum 4094
+  limit-resource vrf minimum 2 maximum 4096
+  limit-resource port-channel minimum 0 maximum 511
+  limit-resource u4route-mem minimum 248 maximum 248
+  limit-resource u6route-mem minimum 96 maximum 96
+  limit-resource m4route-mem minimum 58 maximum 58
+  limit-resource m6route-mem minimum 8 maximum 8
+
+feature telnet
+feature nxapi
+feature bash-shell
+feature scp-server
+nv overlay evpn
+feature ospf
+feature bgp
+feature pim
+feature interface-vlan
+feature vn-segment-vlan-based
+feature lldp
+feature nv overlay
+
+no password strength-check
+username admin password 5 $5$n9H.n578$U07l3NAZtHAWpXMvPkcNoSUotx63w0bqB6B7dy629yA  role network-admin
+ip domain-lookup
+ip name-server 8.8.4.4 use-vrf management
+snmp-server user admin network-admin auth md5 0xdd226fc2f44a8ccfbb41320e3c5f0a15 priv 0xdd226fc2f44a8ccfbb41320e3c5f0a15 localizedkey
+rmon event 1 description FATAL(1) owner PMON@FATAL
+rmon event 2 description CRITICAL(2) owner PMON@CRITICAL
+rmon event 3 description ERROR(3) owner PMON@ERROR
+rmon event 4 description WARNING(4) owner PMON@WARNING
+rmon event 5 description INFORMATION(5) owner PMON@INFO
+
+ip pim rp-address 10.8.251.1 group-list 225.0.0.0/8
+ip pim bsr rp-candidate loopback1 group-list 225.0.0.0/8
+ip pim log-neighbor-changes
+ip pim ssm range 232.0.0.0/8
+ip pim anycast-rp 10.8.251.1 10.8.250.1
+ip pim anycast-rp 10.8.251.1 10.8.250.2
+vlan 1-500
+
+vrf context management
+  ip route 0.0.0.0/0 10.255.0.1
+
+interface Vlan1
+  no shutdown
+
+interface Ethernet1/1
+  no switchport
+  ip address 10.8.0.21/30
+  ip ospf network point-to-point
+  ip router ospf 65100 area 0.0.0.0
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/2
+  no switchport
+  ip address 10.8.0.25/30
+  ip ospf network point-to-point
+  ip router ospf 65100 area 0.0.0.0
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/3
+  no switchport
+  ip address 10.8.0.33/30
+  ip ospf network point-to-point
+  ip router ospf 65100 area 0.0.0.0
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/4
+  no switchport
+  ip address 10.8.0.29/30
+  ip ospf network point-to-point
+  ip router ospf 65100 area 0.0.0.0
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/5
+
+interface Ethernet1/6
+
+interface Ethernet1/7
+
+interface Ethernet1/8
+
+interface Ethernet1/9
+
+interface Ethernet1/10
+
+interface Ethernet1/11
+
+interface Ethernet1/12
+
+interface Ethernet1/13
+
+interface Ethernet1/14
+
+interface Ethernet1/15
+
+interface Ethernet1/16
+
+interface Ethernet1/17
+
+interface Ethernet1/18
+
+interface Ethernet1/19
+
+interface Ethernet1/20
+
+interface Ethernet1/21
+
+interface Ethernet1/22
+
+interface Ethernet1/23
+
+interface Ethernet1/24
+
+interface Ethernet1/25
+
+interface Ethernet1/26
+
+interface Ethernet1/27
+
+interface Ethernet1/28
+
+interface Ethernet1/29
+
+interface Ethernet1/30
+
+interface Ethernet1/31
+
+interface Ethernet1/32
+
+interface Ethernet1/33
+
+interface Ethernet1/34
+
+interface Ethernet1/35
+
+interface Ethernet1/36
+
+interface Ethernet1/37
+
+interface Ethernet1/38
+
+interface Ethernet1/39
+
+interface Ethernet1/40
+
+interface Ethernet1/41
+
+interface Ethernet1/42
+
+interface Ethernet1/43
+
+interface Ethernet1/44
+
+interface Ethernet1/45
+
+interface Ethernet1/46
+
+interface Ethernet1/47
+
+interface Ethernet1/48
+
+interface Ethernet1/49
+
+interface Ethernet1/50
+
+interface Ethernet1/51
+
+interface Ethernet1/52
+
+interface Ethernet1/53
+
+interface Ethernet1/54
+
+interface Ethernet1/55
+
+interface Ethernet1/56
+
+interface Ethernet1/57
+
+interface Ethernet1/58
+
+interface Ethernet1/59
+
+interface Ethernet1/60
+
+interface Ethernet1/61
+
+interface Ethernet1/62
+
+interface Ethernet1/63
+
+interface Ethernet1/64
+
+interface mgmt0
+  vrf member management
+  ip address 10.255.0.104/16
+
+interface loopback0
+  description VTEP IP &amp; BGP
+  ip address 10.8.250.2/32
+  ip router ospf 65100 area 0.0.0.0
+  ip pim sparse-mode
+
+interface loopback1
+  description LP Anycast RP
+  ip address 10.8.251.1/32
+  ip router ospf 65100 area 0.0.0.0
+  ip pim sparse-mode
+cli alias name wr copy runn start
+line console
+line vty
+router ospf 65100
+router bgp 65100
+  router-id 10.8.250.2
+  neighbor 10.8.250.1
+    remote-as 65100
+    update-source loopback0
+    address-family ipv4 unicast
+  neighbor 10.8.250.3
+    remote-as 65100
+    update-source loopback0
+    address-family ipv4 unicast
+    address-family l2vpn evpn
+      send-community
+      send-community extended
+      route-reflector-client
+  neighbor 10.8.250.4
+    remote-as 65100
+    update-source loopback0
+    address-family ipv4 unicast
+    address-family l2vpn evpn
+      send-community
+      send-community extended
+      route-reflector-client
+  neighbor 10.8.250.5
+    remote-as 65100
+    update-source loopback0
+    address-family ipv4 unicast
+    address-family l2vpn evpn
+      send-community
+      send-community extended
+      route-reflector-client
+  neighbor 10.8.250.6
+    remote-as 65100
+    update-source loopback0
+    address-family ipv4 unicast
+    address-family l2vpn evpn
+      send-community
+      send-community extended
+      route-reflector-client
+
+
+</entry>
         </extensions>
         <interface id="0" name="Ethernet1/1"/>
         <interface id="1" name="Ethernet1/2"/>
@@ -190,9 +567,9 @@ router bgp 65100
         <extensions>
             <entry key="Auto-generate config" type="Boolean">false</entry>
             <entry key="config" type="String">!Command: show running-config
-!Time: Wed Jun 28 21:31:01 2017
+!Time: Wed Jan 30 18:34:30 2019
 
-version 7.0(3)I5(1)
+version 7.0(3)I7(1)
 power redundancy-mode combined force
 
 hostname Leaf-1
@@ -229,10 +606,10 @@ rmon event 3 description ERROR(3) owner PMON@ERROR
 rmon event 4 description WARNING(4) owner PMON@WARNING
 rmon event 5 description INFORMATION(5) owner PMON@INFO
 
-vlan 1,101,1001-1002
 fabric forwarding anycast-gateway-mac 0000.1111.222a
 ip pim rp-address 10.8.251.1 group-list 225.0.0.0/8
 ip pim ssm range 232.0.0.0/8
+vlan 1,101,1001-1002
 vlan 101
   vn-segment 900001
 vlan 1001
@@ -273,8 +650,8 @@ interface Vlan1002
 
 interface nve1
   no shutdown
-  source-interface loopback0
   host-reachability protocol bgp
+  source-interface loopback0
   member vni 900001 associate-vrf
   member vni 2001001
     mcast-group 225.4.0.1
@@ -312,9 +689,119 @@ interface Ethernet1/8
 
 interface Ethernet1/9
 
+interface Ethernet1/10
+
+interface Ethernet1/11
+
+interface Ethernet1/12
+
+interface Ethernet1/13
+
+interface Ethernet1/14
+
+interface Ethernet1/15
+
+interface Ethernet1/16
+
+interface Ethernet1/17
+
+interface Ethernet1/18
+
+interface Ethernet1/19
+
+interface Ethernet1/20
+
+interface Ethernet1/21
+
+interface Ethernet1/22
+
+interface Ethernet1/23
+
+interface Ethernet1/24
+
+interface Ethernet1/25
+
+interface Ethernet1/26
+
+interface Ethernet1/27
+
+interface Ethernet1/28
+
+interface Ethernet1/29
+
+interface Ethernet1/30
+
+interface Ethernet1/31
+
+interface Ethernet1/32
+
+interface Ethernet1/33
+
+interface Ethernet1/34
+
+interface Ethernet1/35
+
+interface Ethernet1/36
+
+interface Ethernet1/37
+
+interface Ethernet1/38
+
+interface Ethernet1/39
+
+interface Ethernet1/40
+
+interface Ethernet1/41
+
+interface Ethernet1/42
+
+interface Ethernet1/43
+
+interface Ethernet1/44
+
+interface Ethernet1/45
+
+interface Ethernet1/46
+
+interface Ethernet1/47
+
+interface Ethernet1/48
+
+interface Ethernet1/49
+
+interface Ethernet1/50
+
+interface Ethernet1/51
+
+interface Ethernet1/52
+
+interface Ethernet1/53
+
+interface Ethernet1/54
+
+interface Ethernet1/55
+
+interface Ethernet1/56
+
+interface Ethernet1/57
+
+interface Ethernet1/58
+
+interface Ethernet1/59
+
+interface Ethernet1/60
+
+interface Ethernet1/61
+
+interface Ethernet1/62
+
+interface Ethernet1/63
+
+interface Ethernet1/64
+
 interface mgmt0
-  ip address dhcp
   vrf member management
+  ip address 172.16.1.52/24
 
 interface loopback0
   description VTEP IP &amp; BGP
@@ -352,7 +839,10 @@ evpn
   vni 2001002 l2
     rd auto
     route-target import auto
-    route-target export auto</entry>
+    route-target export auto
+
+
+</entry>
         </extensions>
         <interface id="0" name="Ethernet1/1"/>
         <interface id="1" name="Ethernet1/2"/>
@@ -362,9 +852,9 @@ evpn
         <extensions>
             <entry key="Auto-generate config" type="Boolean">false</entry>
             <entry key="config" type="String">!Command: show running-config
-!Time: Wed Jun 28 21:31:03 2017
+!Time: Wed Jan 30 18:34:30 2019
 
-version 7.0(3)I5(1)
+version 7.0(3)I7(1)
 power redundancy-mode combined force
 
 hostname Leaf-2
@@ -401,10 +891,10 @@ rmon event 3 description ERROR(3) owner PMON@ERROR
 rmon event 4 description WARNING(4) owner PMON@WARNING
 rmon event 5 description INFORMATION(5) owner PMON@INFO
 
-vlan 1,101,1001-1002
 fabric forwarding anycast-gateway-mac 0000.1111.222a
 ip pim rp-address 10.8.251.1 group-list 225.0.0.0/8
 ip pim ssm range 232.0.0.0/8
+vlan 1,101,1001-1002
 vlan 101
   vn-segment 900001
 vlan 1001
@@ -442,8 +932,8 @@ interface Vlan1002
 
 interface nve1
   no shutdown
-  source-interface loopback0
   host-reachability protocol bgp
+  source-interface loopback0
   member vni 900001 associate-vrf
   member vni 2001001
     mcast-group 225.4.0.1
@@ -481,9 +971,119 @@ interface Ethernet1/8
 
 interface Ethernet1/9
 
+interface Ethernet1/10
+
+interface Ethernet1/11
+
+interface Ethernet1/12
+
+interface Ethernet1/13
+
+interface Ethernet1/14
+
+interface Ethernet1/15
+
+interface Ethernet1/16
+
+interface Ethernet1/17
+
+interface Ethernet1/18
+
+interface Ethernet1/19
+
+interface Ethernet1/20
+
+interface Ethernet1/21
+
+interface Ethernet1/22
+
+interface Ethernet1/23
+
+interface Ethernet1/24
+
+interface Ethernet1/25
+
+interface Ethernet1/26
+
+interface Ethernet1/27
+
+interface Ethernet1/28
+
+interface Ethernet1/29
+
+interface Ethernet1/30
+
+interface Ethernet1/31
+
+interface Ethernet1/32
+
+interface Ethernet1/33
+
+interface Ethernet1/34
+
+interface Ethernet1/35
+
+interface Ethernet1/36
+
+interface Ethernet1/37
+
+interface Ethernet1/38
+
+interface Ethernet1/39
+
+interface Ethernet1/40
+
+interface Ethernet1/41
+
+interface Ethernet1/42
+
+interface Ethernet1/43
+
+interface Ethernet1/44
+
+interface Ethernet1/45
+
+interface Ethernet1/46
+
+interface Ethernet1/47
+
+interface Ethernet1/48
+
+interface Ethernet1/49
+
+interface Ethernet1/50
+
+interface Ethernet1/51
+
+interface Ethernet1/52
+
+interface Ethernet1/53
+
+interface Ethernet1/54
+
+interface Ethernet1/55
+
+interface Ethernet1/56
+
+interface Ethernet1/57
+
+interface Ethernet1/58
+
+interface Ethernet1/59
+
+interface Ethernet1/60
+
+interface Ethernet1/61
+
+interface Ethernet1/62
+
+interface Ethernet1/63
+
+interface Ethernet1/64
+
 interface mgmt0
-  ip address dhcp
   vrf member management
+  ip address 172.16.1.53/24
 
 interface loopback0
   description VTEP IP &amp; BGP
@@ -519,7 +1119,10 @@ evpn
   vni 2001002 l2
     rd auto
     route-target import auto
-    route-target export auto</entry>
+    route-target export auto
+
+
+</entry>
         </extensions>
         <interface id="0" name="Ethernet1/1"/>
         <interface id="1" name="Ethernet1/2"/>
@@ -529,9 +1132,9 @@ evpn
         <extensions>
             <entry key="Auto-generate config" type="Boolean">false</entry>
             <entry key="config" type="String">!Command: show running-config
-!Time: Wed Jun 28 21:31:05 2017
+!Time: Wed Jan 30 18:34:20 2019
 
-version 7.0(3)I5(1)
+version 7.0(3)I7(1)
 power redundancy-mode combined force
 
 hostname Leaf-3
@@ -567,10 +1170,10 @@ rmon event 3 description ERROR(3) owner PMON@ERROR
 rmon event 4 description WARNING(4) owner PMON@WARNING
 rmon event 5 description INFORMATION(5) owner PMON@INFO
 
-vlan 1,101,1001-1002
 fabric forwarding anycast-gateway-mac 0000.1111.222a
 ip pim rp-address 10.8.251.1 group-list 225.0.0.0/8
 ip pim ssm range 232.0.0.0/8
+vlan 1,101,1001-1002
 vlan 101
   vn-segment 900001
 vlan 1001
@@ -611,8 +1214,8 @@ interface Vlan1002
 
 interface nve1
   no shutdown
-  source-interface loopback0
   host-reachability protocol bgp
+  source-interface loopback0
   member vni 900001 associate-vrf
   member vni 2001001
     mcast-group 225.4.0.1
@@ -637,9 +1240,119 @@ interface Ethernet1/8
 
 interface Ethernet1/9
 
+interface Ethernet1/10
+
+interface Ethernet1/11
+
+interface Ethernet1/12
+
+interface Ethernet1/13
+
+interface Ethernet1/14
+
+interface Ethernet1/15
+
+interface Ethernet1/16
+
+interface Ethernet1/17
+
+interface Ethernet1/18
+
+interface Ethernet1/19
+
+interface Ethernet1/20
+
+interface Ethernet1/21
+
+interface Ethernet1/22
+
+interface Ethernet1/23
+
+interface Ethernet1/24
+
+interface Ethernet1/25
+
+interface Ethernet1/26
+
+interface Ethernet1/27
+
+interface Ethernet1/28
+
+interface Ethernet1/29
+
+interface Ethernet1/30
+
+interface Ethernet1/31
+
+interface Ethernet1/32
+
+interface Ethernet1/33
+
+interface Ethernet1/34
+
+interface Ethernet1/35
+
+interface Ethernet1/36
+
+interface Ethernet1/37
+
+interface Ethernet1/38
+
+interface Ethernet1/39
+
+interface Ethernet1/40
+
+interface Ethernet1/41
+
+interface Ethernet1/42
+
+interface Ethernet1/43
+
+interface Ethernet1/44
+
+interface Ethernet1/45
+
+interface Ethernet1/46
+
+interface Ethernet1/47
+
+interface Ethernet1/48
+
+interface Ethernet1/49
+
+interface Ethernet1/50
+
+interface Ethernet1/51
+
+interface Ethernet1/52
+
+interface Ethernet1/53
+
+interface Ethernet1/54
+
+interface Ethernet1/55
+
+interface Ethernet1/56
+
+interface Ethernet1/57
+
+interface Ethernet1/58
+
+interface Ethernet1/59
+
+interface Ethernet1/60
+
+interface Ethernet1/61
+
+interface Ethernet1/62
+
+interface Ethernet1/63
+
+interface Ethernet1/64
+
 interface mgmt0
-  ip address dhcp
   vrf member management
+  ip address 172.16.1.54/24
 
 interface loopback0
   description VTEP IP &amp; BGP
@@ -678,7 +1391,10 @@ evpn
   vni 2001002 l2
     rd auto
     route-target import auto
-    route-target export auto</entry>
+    route-target export auto
+
+
+</entry>
         </extensions>
         <interface id="0" name="Ethernet1/1"/>
         <interface id="1" name="Ethernet1/2"/>
@@ -688,9 +1404,9 @@ evpn
         <extensions>
             <entry key="Auto-generate config" type="Boolean">false</entry>
             <entry key="config" type="String">!Command: show running-config
-!Time: Wed Jun 28 21:31:03 2017
+!Time: Wed Jan 30 18:34:30 2019
 
-version 7.0(3)I5(1)
+version 7.0(3)I7(1)
 power redundancy-mode combined force
 
 hostname Leaf-4
@@ -727,10 +1443,10 @@ rmon event 3 description ERROR(3) owner PMON@ERROR
 rmon event 4 description WARNING(4) owner PMON@WARNING
 rmon event 5 description INFORMATION(5) owner PMON@INFO
 
-vlan 1,101,1001-1002
 fabric forwarding anycast-gateway-mac 0000.1111.222a
 ip pim rp-address 10.8.251.1 group-list 225.0.0.0/8
 ip pim ssm range 232.0.0.0/8
+vlan 1,101,1001-1002
 vlan 101
   vn-segment 900001
 vlan 1001
@@ -768,8 +1484,8 @@ interface Vlan1002
 
 interface nve1
   no shutdown
-  source-interface loopback0
   host-reachability protocol bgp
+  source-interface loopback0
   member vni 900001 associate-vrf
   member vni 2001001
     mcast-group 225.4.0.1
@@ -807,9 +1523,119 @@ interface Ethernet1/8
 
 interface Ethernet1/9
 
+interface Ethernet1/10
+
+interface Ethernet1/11
+
+interface Ethernet1/12
+
+interface Ethernet1/13
+
+interface Ethernet1/14
+
+interface Ethernet1/15
+
+interface Ethernet1/16
+
+interface Ethernet1/17
+
+interface Ethernet1/18
+
+interface Ethernet1/19
+
+interface Ethernet1/20
+
+interface Ethernet1/21
+
+interface Ethernet1/22
+
+interface Ethernet1/23
+
+interface Ethernet1/24
+
+interface Ethernet1/25
+
+interface Ethernet1/26
+
+interface Ethernet1/27
+
+interface Ethernet1/28
+
+interface Ethernet1/29
+
+interface Ethernet1/30
+
+interface Ethernet1/31
+
+interface Ethernet1/32
+
+interface Ethernet1/33
+
+interface Ethernet1/34
+
+interface Ethernet1/35
+
+interface Ethernet1/36
+
+interface Ethernet1/37
+
+interface Ethernet1/38
+
+interface Ethernet1/39
+
+interface Ethernet1/40
+
+interface Ethernet1/41
+
+interface Ethernet1/42
+
+interface Ethernet1/43
+
+interface Ethernet1/44
+
+interface Ethernet1/45
+
+interface Ethernet1/46
+
+interface Ethernet1/47
+
+interface Ethernet1/48
+
+interface Ethernet1/49
+
+interface Ethernet1/50
+
+interface Ethernet1/51
+
+interface Ethernet1/52
+
+interface Ethernet1/53
+
+interface Ethernet1/54
+
+interface Ethernet1/55
+
+interface Ethernet1/56
+
+interface Ethernet1/57
+
+interface Ethernet1/58
+
+interface Ethernet1/59
+
+interface Ethernet1/60
+
+interface Ethernet1/61
+
+interface Ethernet1/62
+
+interface Ethernet1/63
+
+interface Ethernet1/64
+
 interface mgmt0
-  ip address dhcp
   vrf member management
+  ip address 172.16.1.55/24
 
 interface loopback0
   description VTEP IP &amp; BGP
@@ -847,7 +1673,10 @@ evpn
   vni 2001002 l2
     rd auto
     route-target import auto
-    route-target export auto</entry>
+    route-target export auto
+
+
+</entry>
         </extensions>
         <interface id="0" name="Ethernet1/1"/>
         <interface id="1" name="Ethernet1/2"/>
@@ -857,7 +1686,7 @@ evpn
         <extensions>
             <entry key="Auto-generate config" type="Boolean">false</entry>
             <entry key="config" type="String">!
-! Last configuration change at 21:31:13 UTC Wed Jun 28 2017
+! Last configuration change at 18:34:16 UTC Wed Jan 30 2019
 !
 version 15.6
 service timestamps debug datetime msec
@@ -872,7 +1701,6 @@ boot-end-marker
 !
 !
 no aaa new-model
-ethernet lmi ce
 !
 !
 !
@@ -915,10 +1743,8 @@ redundancy
 !
 !
 !
-!
 interface GigabitEthernet0/0
- no ip address
- shutdown
+ ip address 172.16.1.58 255.255.255.0
  duplex auto
  speed auto
  media-type rj45
@@ -938,7 +1764,10 @@ ip forward-protocol nd
 !
 no ip http server
 no ip http secure-server
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
 !
+ipv6 ioam timestamp
 !
 !
 !
@@ -980,7 +1809,9 @@ line vty 0 4
 !
 no scheduler allocate
 !
-end</entry>
+end
+
+</entry>
         </extensions>
         <interface id="0" name="GigabitEthernet0/1"/>
     </node>
@@ -988,7 +1819,7 @@ end</entry>
         <extensions>
             <entry key="Auto-generate config" type="Boolean">false</entry>
             <entry key="config" type="String">!
-! Last configuration change at 21:31:13 UTC Wed Jun 28 2017
+! Last configuration change at 18:34:12 UTC Wed Jan 30 2019
 !
 version 15.6
 service timestamps debug datetime msec
@@ -1003,7 +1834,6 @@ boot-end-marker
 !
 !
 no aaa new-model
-ethernet lmi ce
 !
 !
 !
@@ -1046,9 +1876,8 @@ redundancy
 !
 !
 !
-!
 interface GigabitEthernet0/0
- no ip address
+ ip address 172.16.1.59 255.255.255.0
  shutdown
  duplex auto
  speed auto
@@ -1069,7 +1898,10 @@ ip forward-protocol nd
 !
 no ip http server
 no ip http secure-server
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
 !
+ipv6 ioam timestamp
 !
 !
 !
@@ -1111,7 +1943,9 @@ line vty 0 4
 !
 no scheduler allocate
 !
-end</entry>
+end
+
+</entry>
         </extensions>
         <interface id="0" name="GigabitEthernet0/1"/>
     </node>
@@ -1119,7 +1953,7 @@ end</entry>
         <extensions>
             <entry key="Auto-generate config" type="Boolean">false</entry>
             <entry key="config" type="String">!
-! Last configuration change at 21:31:28 UTC Wed Jun 28 2017
+! Last configuration change at 18:34:13 UTC Wed Jan 30 2019
 !
 version 15.6
 service timestamps debug datetime msec
@@ -1134,7 +1968,6 @@ boot-end-marker
 !
 !
 no aaa new-model
-ethernet lmi ce
 !
 !
 !
@@ -1177,9 +2010,8 @@ redundancy
 !
 !
 !
-!
 interface GigabitEthernet0/0
- no ip address
+ ip address 172.16.1.60 255.255.255.0
  shutdown
  duplex auto
  speed auto
@@ -1197,7 +2029,10 @@ ip forward-protocol nd
 !
 no ip http server
 no ip http secure-server
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
 !
+ipv6 ioam timestamp
 !
 !
 !
@@ -1239,7 +2074,9 @@ line vty 0 4
 !
 no scheduler allocate
 !
-end</entry>
+end
+
+</entry>
         </extensions>
         <interface id="0" name="GigabitEthernet0/1"/>
     </node>
@@ -1247,7 +2084,7 @@ end</entry>
         <extensions>
             <entry key="Auto-generate config" type="Boolean">false</entry>
             <entry key="config" type="String">!
-! Last configuration change at 21:31:32 UTC Wed Jun 28 2017
+! Last configuration change at 18:34:13 UTC Wed Jan 30 2019
 !
 version 15.6
 service timestamps debug datetime msec
@@ -1262,7 +2099,6 @@ boot-end-marker
 !
 !
 no aaa new-model
-ethernet lmi ce
 !
 !
 !
@@ -1305,9 +2141,8 @@ redundancy
 !
 !
 !
-!
 interface GigabitEthernet0/0
- no ip address
+ ip address 172.16.1.61 255.255.255.0
  shutdown
  duplex auto
  speed auto
@@ -1325,7 +2160,10 @@ ip forward-protocol nd
 !
 no ip http server
 no ip http secure-server
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
 !
+ipv6 ioam timestamp
 !
 !
 !
@@ -1367,7 +2205,9 @@ line vty 0 4
 !
 no scheduler allocate
 !
-end</entry>
+end
+
+</entry>
         </extensions>
         <interface id="0" name="GigabitEthernet0/1"/>
     </node>
