@@ -1,2 +1,2 @@
 # repo_01
-Test Repository for VIRL Labs.
+Test Repository for Cisco CPL Labs.
